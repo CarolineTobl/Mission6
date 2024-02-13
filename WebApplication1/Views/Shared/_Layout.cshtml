@@ -39,7 +39,7 @@
 </head>
 
 <!-- ======= Header ======= -->
-<body>
+<body class="super-light-blue-bg">
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
@@ -54,9 +54,9 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="@Url.Action("Index", "Home")" class="active">Home</a></li>
-                    <li><a href="@Url.Action("About", "Home")">About</a></li>
-                    <li><a href="@Url.Action("Movies", "Home")">Movies</a></li>
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-controller="Home" asp-action="Movies">Movies</a></li>
                 </ul>
             </nav><!-- .navbar -->
 

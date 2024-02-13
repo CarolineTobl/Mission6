@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using WebApplication1.Models;
+using Mission6.Models;
 
-namespace WebApplication1.Controllers
+namespace Mission6.Controllers
 {
     public class HomeController : Controller
     {
@@ -23,9 +23,17 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Movies()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Movies(Application response) //I want to recieve an instance of the data
+        {
+            return View("Confirmation", response);
         }
     }
 }

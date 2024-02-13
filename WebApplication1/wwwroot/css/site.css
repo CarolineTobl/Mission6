@@ -495,7 +495,7 @@ section {
 .hero {
     width: 100%;
     min-height: 100vh;
-    background: url("../img/hero-bg.jpg") top center;
+    background: url("/img/JoelHiltonHeadshot.jpg") top center;
     background-size: cover;
     position: relative;
     padding: 120px 0;
@@ -2176,3 +2176,37 @@ section {
             font-size: 13px;
             color: var(--color-secondary);
         }
+
+.super-light-blue-bg {
+    background-color: #e0f1ff; /* Adjust the color code as needed */
+}
+
+.container
+
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Adjust alignment */
+    margin: 20px auto;
+    width: 80%;
+}
+
+.box {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 10px; /* Add margin to create space between boxes */
+    max-width: calc(33.33% - 20px); /* Ensure equal width for each box */
+}
+
+    .box img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover; /* Ensure the image fills the square */
+        border-radius: 5px; /* Remove circle border radius */
+        margin-bottom: 10px;
+    }
+
