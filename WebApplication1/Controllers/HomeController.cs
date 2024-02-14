@@ -6,13 +6,12 @@ namespace Mission6.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger) ///Constructor, recieveing information of type logger. that can be seen throughout the class.
+        private MovieContext _context;
+        public HomeController(MovieContext movieName) 
         {
-            _logger = logger;
+            _context = movieName;
         }
-
+ 
         public IActionResult Index()
         {
             return View();
@@ -33,6 +32,9 @@ namespace Mission6.Controllers
         [HttpPost]
         public IActionResult Movies(Application response) //I want to recieve an instance of the data. Response is an instance of the application class
         {
+            _context.Applications.Add(response); //Adding the record to the database
+            _context.SaveChanges();
+
             return View("Confirmation", response);
         }
     }
