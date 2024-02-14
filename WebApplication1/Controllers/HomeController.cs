@@ -31,7 +31,7 @@ namespace Mission6.Controllers
 
 
         [HttpPost]
-        public IActionResult Movies(Application response) //I want to recieve an instance of the data
+        public IActionResult Movies(Application response) //I want to recieve an instance of the data. Response is an instance of the application class
         {
             return View("Confirmation", response);
         }
