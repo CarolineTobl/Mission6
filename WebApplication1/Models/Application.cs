@@ -23,12 +23,11 @@ namespace Mission6.Models
         [Required]
         public string Rating { get; set; }
 
-        [Required]
-        public bool Edited { get; set; } //Will need to change since true and false
-        public string LentTo { get; set; }
+        public bool? Edited { get; set; } //Will need to change since true and false
+        public string? LentTo { get; set; }
 
         [MaxLength(25)]
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
 
     }
 }
