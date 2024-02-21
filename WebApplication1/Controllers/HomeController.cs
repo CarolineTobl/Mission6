@@ -37,5 +37,13 @@ namespace Mission6.Controllers
 
             return View("Confirmation", response);
         }
+
+        public IActionResult List()
+        {
+            //ling
+            var applications = _context.Applications
+                .OrderBy(x => x.Title).ToList();//Applications is the name of the table (when I change dataBases, I will need to change the table name 
+            return View(applications);
+        }
     }
 }

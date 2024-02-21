@@ -9,5 +9,6 @@ namespace Mission6.Models
         } //creating a class of time MovieContext
 
         public DbSet<Application> Applications { get; set; }
+        public DbSet<Category> Category { get; set; }
     }
 }

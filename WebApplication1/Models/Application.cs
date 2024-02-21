@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission6.Models
 {
@@ -8,8 +9,9 @@ namespace Mission6.Models
         [Required]
         public int ApplicationID { get; set; } //Just get is a read only variable
 
-        [Required]
-        public string Category { get; set; }
+        [ForeignKey("CategoryID")]
+        public string CategoryID { get; set; }
+        public Category Category { get; set; }
 
         [Required]
         public string Title { get; set; }
