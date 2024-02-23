@@ -1,17 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Mission6.Models;
-
 namespace Mission6.Controllers
 {
     public class HomeController : Controller
     {
         private MovieContext _context;
-        public HomeController(MovieContext movieName) 
+
+        public HomeController(MovieContext movieName)
         {
             _context = movieName;
         }
- 
+
         public IActionResult Index()
         {
             return View();
@@ -22,28 +23,50 @@ namespace Mission6.Controllers
             return View();
         }
 
+        // This method is for displaying the form to add a new movie
         [HttpGet]
         public IActionResult Movies()
         {
-            return View();
+            // Populate ViewBag with categories for the drop-down list
+            ViewBag.Categories = new SelectList(_context.Categories, "CategoryId", "CategoryName");
+            return View(new Movies()); // Passing a new Movies instance to your view for form binding
         }
 
-
+        // This method handles the form submission
         [HttpPost]
-        public IActionResult Movies(Application response) //I want to recieve an instance of the data. Response is an instance of the application class
+        public IActionResult Movies(Movies movieToCreate)
         {
-            _context.Applications.Add(response); //Adding the record to the database
-            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _context.Movies.Add(movieToCreate);
+                _context.SaveChanges();
+                return View("Confirmation", movieToCreate);
+            }
 
-            return View("Confirmation", response);
+            // If the model state is not valid, repopulate the categories and show the form again
+            ViewBag.Categories = new SelectList(_context.Categories, "CategoryId", "CategoryName");
+            return View(movieToCreate);
         }
 
         public IActionResult List()
         {
-            //ling
-            var applications = _context.Applications
-                .OrderBy(x => x.Title).ToList();//Applications is the name of the table (when I change dataBases, I will need to change the table name 
-            return View(applications);
+            var movies = _context.Movies
+                .Include(m => m.Category) // Include the Category navigation property
+                .OrderBy(x => x.Title)
+                .ToList();
+            return View(movies);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var movieToDelete = _context.Movies.FirstOrDefault(m => m.MovieId == id);
+            if (movieToDelete != null)
+            {
+                _context.Movies.Remove(movieToDelete);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("List");
         }
     }
 }

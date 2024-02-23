@@ -1,4 +1,4 @@
-﻿@model Application
+﻿@model Movies
 
 <main id="main">
 
@@ -6,13 +6,11 @@
     <section id="why-us" class="why-us">
         <div class="section-header">
             <h2>Add to the Collection</h2>
-
         </div>
         <div class="container" data-aos="fade-up">
-
             <form method="post">
-                <label asp-for="Category">Category:</label>
-                <input asp-for="Category" required />
+                <label asp-for="CategoryId">Category:</label>
+                <select asp-for="CategoryId" asp-items="ViewBag.Categories" required></select>
                 <br />
                 <br />
                 <label asp-for="Title">Title:</label>
@@ -24,7 +22,7 @@
                 <br />
                 <br />
                 <label asp-for="Director">Director:</label>
-                <input asp-for="Director" required />
+                <input asp-for="Director" />
                 <br />
                 <br />
                 <label asp-for="Rating">Rating:</label>
@@ -41,7 +39,6 @@
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
-
                 <br />
                 <br />
                 <label asp-for="LentTo">Lent to:</label>
@@ -49,17 +46,11 @@
                 <br />
                 <br />
                 <label asp-for="Notes">Notes:</label>
-                <input asp-for="Notes" maxlength="25" />
+                <input asp-for="Notes" />
                 <br />
                 <br />
-
                 <button type="submit">Submit Movie</button>
             </form>
-
-
-
-            
-
         </div>
         <br><br>
     </section><!-- End Why Choose Us Section -->

@@ -1,11 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Mission6.Models
+﻿namespace Mission6.Models
 {
     public class Category
     {
-        [Key]
-        public int CategoryID { get; set; }
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; }
+
+        public List<Movies> Movies { get; set; } // Navigation property
     }
 }
