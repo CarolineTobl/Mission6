@@ -32,20 +32,12 @@ namespace Mission6.Controllers
             return View(new Movies()); // Passing a new Movies instance to your view for form binding
         }
 
-        // This method handles the form submission
         [HttpPost]
         public IActionResult Movies(Movies movieToCreate)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Movies.Add(movieToCreate);
-                _context.SaveChanges();
-                return View("Confirmation", movieToCreate);
-            }
-
-            // If the model state is not valid, repopulate the categories and show the form again
-            ViewBag.Categories = new SelectList(_context.Categories, "CategoryId", "CategoryName");
-            return View(movieToCreate);
+            _context.Movies.Add(movieToCreate);
+            _context.SaveChanges();
+            return View("Confirmation", movieToCreate); // Return the confirmation view
         }
 
         public IActionResult List()
@@ -68,5 +60,32 @@ namespace Mission6.Controllers
             }
             return RedirectToAction("List");
         }
+
+        //editing movies
+        public async Task<IActionResult> EditMovie(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var movie = await _context.Movies.FindAsync(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Categories = new SelectList(_context.Categories, "CategoryId", "CategoryName", movie.CategoryId);
+            return View(movie);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditMovie(Movies movieToUpdate)
+        {
+            _context.Movies.Update(movieToUpdate);
+            await _context.SaveChangesAsync();
+            return View("Confirmation", movieToUpdate); // Return the confirmation view
+        }
+
     }
 }
