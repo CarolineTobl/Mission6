@@ -84,7 +84,7 @@ namespace Mission6.Controllers
         {
             _context.Movies.Update(movieToUpdate);
             await _context.SaveChangesAsync();
-            return View("Confirmation", movieToUpdate); // Return the confirmation view
+            return View("Confirmation1", movieToUpdate); // Return the confirmation view
         }
 
     }
